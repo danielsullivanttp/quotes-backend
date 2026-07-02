@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const  dbConnection  = require("../db");
 
-const Quote = dbConnection.define("quote", {
+const Quote = dbConnection.define("quotes", {
   text: {
     type: DataTypes.STRING,
     allowNull: false,

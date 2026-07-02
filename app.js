@@ -18,8 +18,8 @@ const cors = require('cors')
 
 // ------------------------------------------------------------
 // STEP 1 — Import your database connection and Quote model
-
-
+const dbConnection = require("./db")
+const Quote = require("./models/quote")
 
 
 
@@ -29,7 +29,6 @@ const cors = require('cors')
 // So now that we have the db, let's sync first before we start our api server
 // Jump to the last line for STEP 2
 // ------------------------------------------------------------
-
 
 const app = express()
 const PORT = 8080
@@ -127,7 +126,7 @@ app.use((error, req, res, next) => {
 // ============================================================
 async function startApp() {
   // connect to your db here before the express server listens
-
+  await dbConnection.sync()
 
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 }
