@@ -1,3 +1,9 @@
+const { Sequelize } = require("sequelize");
+
+const dbConnection = new Sequelize("postgres://postgres:root@localhost:5432/quote");
+
+module.exports = dbConnection;
+
 // ============================================================
 // db/index.js — Sequelize connection
 //
