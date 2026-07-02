@@ -1,7 +1,12 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize,d} = require("sequelize");
 
 const dbConnection = new Sequelize("postgres://postgres:root@localhost:5432/quote");
-
+try {
+  await dbConnection.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
 module.exports = dbConnection;
 
 // ============================================================
