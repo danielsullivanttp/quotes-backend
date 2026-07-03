@@ -50,7 +50,8 @@ app.use(cors())          // allows the React frontend to call this server
 // ------------------------------------------------------------
 app.get('/api/quotes', async (req, res, next) => {
   try {
-
+    const quote  = await Quote.findAll();
+    res.json(quote);
   } catch (error) {
     next(error)
   }
@@ -69,11 +70,12 @@ app.get('/api/quotes', async (req, res, next) => {
 // ------------------------------------------------------------
 app.post('/api/quotes', async (req, res, next) => {
   try {
-
+     const quote = await Quote.create(req.body);
+     res.status(201).json(quote);
   } catch (error) {
     next(error)
   }
-})
+});
 
 
 // ------------------------------------------------------------
@@ -90,9 +92,16 @@ app.post('/api/quotes', async (req, res, next) => {
 // ------------------------------------------------------------
 app.delete('/api/quotes/:id', async (req, res, next) => {
   try {
-
+     const id = Number(req.params.id)
+     const quote = await Quote.findByPk(id);
+      
+     if(!quote){
+        return res.status(404)
+     }
+     await quote.destroy(id)
+     res.sendStatus(204)
   } catch (error) {
-    next(error)
+       next(error)
   }
 })
 
