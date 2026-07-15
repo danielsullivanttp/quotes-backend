@@ -1,6 +1,6 @@
 const { Sequelize} = require("sequelize");
-
-const dbConnection = new Sequelize("postgres://postgres:root@localhost:5432/quote");
+console.log(process.env.DATABASE_URI)
+const dbConnection = new Sequelize(process.env.DATABASE_URI);
 
 module.exports = dbConnection;
 

@@ -15,7 +15,8 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-
+const dotEnv = require("dotenv")
+dotEnv.config();
 // ------------------------------------------------------------
 // STEP 1 — Import your database connection and Quote model
 const dbConnection = require("./db")
@@ -31,7 +32,6 @@ const Quote = require("./models/quote")
 // ------------------------------------------------------------
 
 const app = express()
-const PORT = 8080
 
 app.use(express.json())  // lets the server read JSON from req.body
 app.use(morgan('dev'))   // logs every incoming request
@@ -137,7 +137,7 @@ async function startApp() {
   // connect to your db here before the express server listens
   await dbConnection.sync()
 
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+  app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`))
 }
 
 startApp()
